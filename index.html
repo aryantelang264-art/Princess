@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Princess Day, Bestie! 👑</title>
+<style>
+*{box-sizing:border-box}
+:root{--pink:#f7a8d0;--purple:#a88be8;--ink:#713b69}
+body{margin:0;min-height:100vh;font-family:Georgia,serif;color:var(--ink);display:grid;place-items:center;
+background:linear-gradient(-45deg,#ffe3f0,#f3e4ff,#fff0f6,#e9e0ff);background-size:400% 400%;animation:bg 14s ease infinite;overflow-x:hidden;padding:22px}
+@keyframes bg{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}
+.card{width:min(100%,570px);text-align:center;padding:clamp(26px,7vw,48px) 24px;background:#ffffffd9;
+border:2px solid white;border-radius:32px;box-shadow:0 20px 65px #a75d9b30;position:relative;z-index:2;animation:appear 1s ease both}
+@keyframes appear{from{opacity:0;transform:translateY(25px) scale(.97)}to{opacity:1;transform:none}}
+.crown{font-size:62px;display:inline-block;animation:bounce 2s ease-in-out infinite;filter:drop-shadow(0 6px 5px #e6a2c5)}
+@keyframes bounce{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-10px) rotate(5deg)}}
+.eyebrow{letter-spacing:3px;text-transform:uppercase;font: bold 10px Arial,sans-serif;color:#b45b91}
+h1{font-size:clamp(36px,9vw,58px);line-height:1.05;margin:15px 0;color:#a43d7c}
+h1 span{display:block;color:#8158b2;font-style:italic}
+.divider{color:#d88bb7;font-size:22px;margin:18px}
+p{font-size:17px;line-height:1.75;margin:12px auto;max-width:440px}
+.note{background:#fff2f9;border:1px dashed #e7a1c9;border-radius:20px;padding:16px;margin:23px 0}
+button{border:0;border-radius:999px;padding:13px 21px;background:linear-gradient(110deg,#d95d9d,#9871d6);color:white;font-weight:bold;font-size:14px;cursor:pointer;box-shadow:0 8px 18px #b35c9c40;margin:6px;transition:.2s}
+button:hover{transform:translateY(-3px) scale(1.03)}
+#surprise{display:none;margin-top:18px;padding:18px;border-radius:18px;background:#f7efff;line-height:1.7;animation:appear .5s ease}
+.music-status{font:12px Arial,sans-serif;color:#9a6596;margin-top:7px}
+.footer{font:12px Arial,sans-serif;color:#ad78a0;margin-top:22px}
+.float{position:fixed;bottom:-40px;z-index:1;pointer-events:none;animation:rise linear forwards;opacity:.85}
+@keyframes rise{to{transform:translateY(-115vh) rotate(360deg);opacity:0}}
+.twinkle{position:absolute;color:#e7a0c8;animation:twinkle 1.8s ease-in-out infinite alternate}
+@keyframes twinkle{from{opacity:.25;transform:scale(.7)}to{opacity:1;transform:scale(1.2)}}
+
+/* Fairytale suspense reveal */
+.reveal-screen{position:fixed;inset:0;z-index:10;display:grid;place-items:center;background:radial-gradient(circle at center,#fff4fb 0,#d9c3f6 48%,#8e6ab7 100%);padding:24px;text-align:center;transition:opacity 1s ease,visibility 1s ease}
+.reveal-screen.hide{opacity:0;visibility:hidden;pointer-events:none}
+.reveal-box{max-width:420px;color:#713b69;animation:revealFloat 3s ease-in-out infinite}
+.reveal-box .magic-crown{font-size:76px;display:block;filter:drop-shadow(0 8px 15px #6e3b8766);animation:magicPulse 1.8s infinite}
+.reveal-box h2{font-size:clamp(28px,7vw,42px);margin:16px 0;color:#fff;text-shadow:0 3px 15px #754b9a}
+.reveal-box p{color:#fff;font:15px Arial,sans-serif;line-height:1.6}
+.reveal-box button{background:linear-gradient(110deg,#ef83bd,#9871d6);border:1px solid #fff8}
+#countdown{font-size:54px;color:white;text-shadow:0 4px 20px #704b9b;font-weight:bold;min-height:64px}
+.card{animation:princessEntrance 1.6s cubic-bezier(.2,.8,.2,1) both}
+@keyframes princessEntrance{0%{opacity:0;transform:translateY(35px) scale(.86);filter:blur(8px)}70%{opacity:1;transform:translateY(-5px) scale(1.02);filter:blur(0)}100%{opacity:1;transform:none}}
+@keyframes revealFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes magicPulse{0%,100%{transform:scale(1) rotate(-5deg)}50%{transform:scale(1.12) rotate(5deg)}}
+.magic-particle{position:fixed;z-index:11;pointer-events:none;animation:magicFly 2.4s ease-out forwards}
+@keyframes magicFly{0%{opacity:0;transform:translate(0,0) scale(.4) rotate(0)}15%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.3) rotate(180deg)}}
+</style>
+</head>
+<body>
+<div class="reveal-screen" id="revealScreen">
+ <div class="reveal-box">
+  <span class="magic-crown">👑</span>
+  <h2>A little magic is waiting...</h2>
+  <p>Something beautiful has been made for a very special bestie. Are you ready? ✨</p>
+  <div id="countdown"></div>
+  <button id="revealButton" onclick="startReveal()">✨ Reveal the magic ✨</button>
+ </div>
+</div>
+<main class="card">
+  <span class="twinkle" style="top:25px;left:25px">✦</span><span class="twinkle" style="top:45px;right:30px;animation-delay:.7s">✧</span>
+  <div class="crown">👑</div>
+  <div class="eyebrow">A little celebration for my favourite bestie</div>
+  <h1>Happy <span>Princess Day!</span></h1>
+  <div class="divider">✧･ﾟ: *✧･ﾟ:* ♡ *:･ﾟ✧*:･ﾟ✧</div>
+  <p>To the girl who makes ordinary days brighter — you deserve all the happiness, kindness and magic in the world. 🌷</p>
+  <div class="note"><p><strong>Dear Bestie, 💗</strong><br>
+  Keep shining in your own beautiful way. Never stop being the funny, caring and wonderfully unique person you are. The world is lucky to have you!</p></div>
+  <audio id="bestieSong" preload="metadata" loop src="assets/bestie-song.mp3"></audio>
+<button id="musicBtn" onclick="toggleMusic()">♫ Play our song</button>
+<div class="music-status" id="musicStatus">Your uploaded song is ready — tap play! 🎶</div>
+  <br>
+  <button onclick="showSurprise()">Open your little surprise 🎁</button>
+  <div id="surprise">🌸 Official announcement: You are the Princess of today!<br>
+  May your day be filled with smiles, sweet moments, laughter and lovely memories.<br><strong>Stay fabulous, bestie! 💕</strong></div>
+  <div class="footer">Made with friendship, sparkles & lots of love ♡</div>
+</main>
+<script>
+const song=document.getElementById('bestieSong');
+async function toggleMusic(){
+ const btn=document.getElementById('musicBtn'),status=document.getElementById('musicStatus');
+ if(song.paused){
+   try{
+     await song.play();
+     btn.textContent='Ⅱ Pause song';
+     status.textContent='♪ Your song is playing — enjoy, bestie! 💗';
+   }catch(e){
+     status.textContent='Tap play again to start the song.';
+   }
+ }else{
+   song.pause();
+   btn.textContent='♫ Play our song';
+   status.textContent='Song paused — tap play whenever you like.';
+ }
+}
+song.addEventListener('ended',()=>{
+ document.getElementById('musicBtn').textContent='♫ Play our song';
+});
+
+function startReveal(){
+ const button=document.getElementById('revealButton');
+ const count=document.getElementById('countdown');
+ button.disabled=true;button.style.opacity='.6';
+ let n=3;count.textContent=n;
+ const tick=setInterval(()=>{
+   n--;
+   if(n>0){count.textContent=n;}
+   else if(n===0){count.textContent='✨';}
+   else{
+     clearInterval(tick);
+     burstMagic();
+     document.getElementById('revealScreen').classList.add('hide');
+   }
+ },850);
+}
+function burstMagic(){
+ const symbols=['✨','💖','🌸','🦋','⭐','♡','👑'];
+ for(let i=0;i<65;i++){
+   const p=document.createElement('span');p.className='magic-particle';
+   p.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+   p.style.left=(35+Math.random()*30)+'vw';p.style.top=(35+Math.random()*30)+'vh';
+   p.style.setProperty('--dx',((Math.random()-.5)*100)+'vw');
+   p.style.setProperty('--dy',((Math.random()-.5)*100)+'vh');
+   p.style.fontSize=(15+Math.random()*23)+'px';
+   document.body.appendChild(p);setTimeout(()=>p.remove(),2500);
+ }
+}
+function showSurprise(){const box=document.getElementById('surprise');box.style.display=box.style.display==='block'?'none':'block';if(box.style.display==='block')burst();}
+function burst(){
+ const icons=['💖','🌸','✨','🦋','💕','⭐'];
+ for(let i=0;i<22;i++){const el=document.createElement('span');el.className='float';el.textContent=icons[Math.floor(Math.random()*icons.length)];el.style.left=Math.random()*100+'vw';el.style.fontSize=(16+Math.random()*20)+'px';el.style.animationDuration=(4+Math.random()*4)+'s';document.body.appendChild(el);setTimeout(()=>el.remove(),8500);}
+}
+setInterval(()=>{const el=document.createElement('span');el.className='float';el.textContent=['♡','✦','🌷','✨'][Math.floor(Math.random()*4)];el.style.left=Math.random()*100+'vw';el.style.fontSize=(14+Math.random()*16)+'px';el.style.animationDuration=(7+Math.random()*5)+'s';document.body.appendChild(el);setTimeout(()=>el.remove(),13000)},900);
+</script>
+</body>
+</html>
